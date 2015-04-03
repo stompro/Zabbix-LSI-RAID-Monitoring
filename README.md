@@ -18,6 +18,7 @@
 - Firmware state (+trigger)
 - Predictive errors (+trigger)
 - Media errors (+trigger)
+- Drive Temperature (+trigger)
 - Size
 - Model
 
@@ -57,5 +58,16 @@ Defaults:zabbix !requiretty
 # path to your tool can be different
 zabbix  ALL=NOPASSWD:/opt/MegaRAID/CmdTool2/CmdTool2
 ```
+
+#### Setup Steps - Linux
+
+ A. On Zabbix Server
+   1. Manually add the 2 value maps under template/value_mappings.txt to the Zabbix value maps at Administration->General->(dropdown)Value Mapping.
+   2. Import the Template from /template/LSI_RAID_template.xml
+   3. Assign hosts to the template or assign template to host groups.
+   4. For each host that will use the template, you need to add that hosts name to the Allowed hosts field for each discovery rule and item prototype of type Zabbix trapper.  Look under configuration -> hosts -> <your_host> -> Discovery Rules.  Edit the discovery rules themselves, along with the item prototypes for each discover rule that are of type Zabbix Trapper.
+  B. On monitored host:
+    1. Setup the rest
+  
 
 I'm not a programmer, so code review will be appreciated :)
